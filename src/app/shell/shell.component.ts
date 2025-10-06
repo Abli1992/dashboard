@@ -28,7 +28,7 @@ import { MatInputModule } from '@angular/material/input';
       <!-- Sidebar -->
       <mat-sidenav mode="side" opened class="app-sidenav">
         <div class="brand">
-          <img src="https://3733081a-b246-44e1-a1cd-1a80f53b01da-00-12pd3gcjgpjbk.janeway.replit.dev/@fs/home/runner/workspace/attached_assets/THC%20Logo.png" alt="The Hawker's Club" class="brand-logo" />
+          <img src="assets/images/logo.png" alt="The Hawker's Club" class="brand-logo" />
           <h1 class="brand-text">The Hawker's Club</h1>
         </div>
 
