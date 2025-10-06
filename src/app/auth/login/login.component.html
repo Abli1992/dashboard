@@ -1,0 +1,48 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <h1 class="title">Recovery Dashboard</h1>
+    <p class="subtitle">Sign in to access your financial recovery data</p>
+
+    <div class="signin-section">
+      <h2 class="signin-title">Sign In</h2>
+      <p class="signin-subtitle">
+        Choose your account type and enter your credentials
+      </p>
+
+      <mat-button-toggle-group [(ngModel)]="userType" class="user-toggle">
+        <mat-button-toggle value="external">External User</mat-button-toggle>
+        <mat-button-toggle value="internal">Internal User</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            required
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Enter your email"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            required
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Enter your password"
+          />
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" class="login-btn" type="submit">
+          Sign In
+        </button>
+      </form>
+    </div>
+  </mat-card>
+</div>

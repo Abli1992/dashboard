@@ -1,0 +1,35 @@
+<div class="client-page">
+  <div class="header">
+    <h1>Select Client</h1>
+    <p class="subtitle">Choose a client to load their recovery dashboard</p>
+
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search client</mat-label>
+      <input
+        matInput
+        [(ngModel)]="search"
+        (ngModelChange)="filterClients()"
+        placeholder="Type to filter clients"
+      />
+      <button mat-icon-button matSuffix (click)="filterClients()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="grid">
+    <mat-card
+      class="client-card"
+      *ngFor="let client of filteredClients"
+      (click)="onSelect(client)"
+    >
+      <div class="client-info">
+        <mat-icon color="primary">account_circle</mat-icon>
+        <span class="client-name">{{ client }}</span>
+      </div>
+      <!-- <button mat-stroked-button color="primary" class="select-btn">
+        Select
+      </button> -->
+    </mat-card>
+  </div>
+</div>

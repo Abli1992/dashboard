@@ -1,0 +1,89 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f9fafb;
+}
+
+.login-card {
+  width: 600px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+  text-align: center;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 32px;
+}
+
+.signin-section {
+  text-align: left;
+}
+
+.signin-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.signin-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.user-toggle {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+::ng-deep .mat-button-toggle-group {
+  display: flex;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+::ng-deep .mat-button-toggle {
+  flex: 1;
+  font-weight: 500;
+  color: #374151;
+}
+
+::ng-deep .mat-button-toggle-checked {
+  background: #ffffff !important;
+  color: #1d4ed8 !important;
+  box-shadow: inset 0 0 0 1.5px #2563eb !important;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.login-btn {
+  width: 100%;
+  height: 44px;
+  font-weight: 500;
+  font-size: 15px;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+}
+
+.login-btn:hover {
+  background: #1e40af;
+}
