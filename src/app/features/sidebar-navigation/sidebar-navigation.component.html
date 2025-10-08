@@ -1,0 +1,34 @@
+<aside class="bg-[#FACC15] text-[#111111] transition-all duration-300 shadow-md flex flex-col"
+       [class.w-64]="!collapsed" [class.w-20]="collapsed">
+  <!-- Brand + toggle -->
+  <div class="p-4 flex items-center justify-between">
+    <h2 *ngIf="!collapsed" class="font-black text-lg">THC</h2>
+    <button type="button" (click)="onToggle()" class="p-2 rounded-md hover:bg-[#f2c500]">
+      <svg class="w-5 h-5 text-[#111]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 overflow-y-auto mt-2">
+    <a *ngFor="let item of items"
+       [routerLink]="item.path"
+       routerLinkActive="bg-white text-[#111] shadow-sm"
+       class="flex items-center gap-3 px-3 py-2 rounded-lg mx-2 my-1 hover:bg-white hover:text-[#111] transition font-medium">
+      <!-- bullet/icon -->
+      <span class="w-2 h-2 rounded-full bg-[#111]/60" *ngIf="collapsed; else labelIcon"></span>
+      <ng-template #labelIcon>
+        <svg class="w-4 h-4 text-[#111]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h10M4 18h7"/>
+        </svg>
+        <span>{{ item.label }}</span>
+      </ng-template>
+    </a>
+  </nav>
+
+  <!-- Footer -->
+  <div class="p-4 text-xs text-center border-t border-[#e4d00a]">
+    <span *ngIf="!collapsed">© THC</span>
+  </div>
+</aside>

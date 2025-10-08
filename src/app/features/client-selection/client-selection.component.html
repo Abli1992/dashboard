@@ -1,0 +1,91 @@
+<div class="min-h-screen flex flex-col items-center bg-[#f9fafb] px-6 py-12">
+  <!-- Heading -->
+  <h1 class="text-4xl font-black text-gray-900 mb-2 text-center">
+    Select Client
+  </h1>
+  <p class="text-gray-500 text-base text-center mb-8">
+    Choose a client to access their recovery dashboard
+  </p>
+
+  <!-- Search -->
+  <div class="relative w-full max-w-2xl mb-10">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Search clients..."
+      class="w-full rounded-lg border border-gray-200 bg-white py-3 pl-10 pr-4 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
+    />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-5 h-5 absolute top-3.5 left-3 text-gray-400"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.64 5.64a7.5 7.5 0 0 0 10.61 10.61Z"
+      />
+    </svg>
+  </div>
+
+  <!-- Grid -->
+  <div
+    class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-5xl justify-center"
+  >
+    <div
+      *ngFor="let client of filteredClients"
+      (click)="onClientClick(client)"
+      class="flex items-center justify-between border border-gray-200 bg-white rounded-xl py-4 px-5 hover:shadow-md transition cursor-pointer hover:-translate-y-0.5 active:scale-[0.98]"
+    >
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-10 h-10 rounded-lg bg-[#2563eb]/10 flex items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.8"
+            stroke="#2563eb"
+            class="w-5 h-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 21h18M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M9 9h6"
+            />
+          </svg>
+        </div>
+        <span class="font-semibold text-gray-800">{{ client }}</span>
+      </div>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.8"
+        stroke="#9ca3af"
+        class="w-5 h-5"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 5l7 7-7 7"
+        />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Logout -->
+  <div class="mt-12">
+    <button
+      (click)="logout()"
+      class="bg-white border border-gray-300 text-gray-600 px-5 py-2 rounded-md hover:bg-gray-50 transition text-sm"
+    >
+      Logout
+    </button>
+  </div>
+</div>

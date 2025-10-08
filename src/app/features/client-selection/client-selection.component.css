@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  font-family: Inter, Roboto, Arial, sans-serif;
+}
+
+input::placeholder {
+  color: #9ca3af;
+}

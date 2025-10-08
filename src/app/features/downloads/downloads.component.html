@@ -1,0 +1,91 @@
+<div class="downloads-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <i class="fa-solid fa-file-lines icon-yellow"></i>
+      <h2>Your Downloads</h2>
+    </div>
+    <div class="header-right">
+      {{ filteredDownloads.length }} of {{ downloads.length }} downloads
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="card">
+    <div class="card-header">
+      <i class="fa-solid fa-filter"></i>
+      <span>Filter Downloads</span>
+    </div>
+    <div class="card-body filters">
+      <div class="search-field">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          placeholder="Search downloads..."
+          [(ngModel)]="searchTerm"
+          (input)="applyFilters()"
+        />
+      </div>
+
+      <select [(ngModel)]="typeFilter" (change)="applyFilters()">
+        <option value="all">All Types</option>
+        <option *ngFor="let type of uniqueTypes" [value]="type">{{ type }}</option>
+      </select>
+
+      <select [(ngModel)]="countryFilter" (change)="applyFilters()">
+        <option value="all">All Countries</option>
+        <option *ngFor="let country of uniqueCountries" [value]="country">
+          {{ country }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card table-card">
+    <div *ngIf="isLoading" class="loading">Loading...</div>
+
+    <!-- ✅ When data exists -->
+    <table *ngIf="!isLoading && filteredDownloads.length > 0">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Download Date</th>
+          <th>Country</th>
+          <th>VC Name</th>
+          <th>Time Period</th>
+          <th>Currency</th>
+          <th>File Size</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of filteredDownloads">
+          <td>
+            <span class="badge" [ngClass]="getTypeColor(d.type)">
+              {{ d.type }}
+            </span>
+          </td>
+          <td>{{ formatDate(d.downloadDate) }}</td>
+          <td>{{ d.country }}</td>
+          <td>{{ d.vcName }}</td>
+          <td>{{ d.timePeriod }}</td>
+          <td>{{ d.currency }}</td>
+          <td>{{ formatFileSize(d.fileSize) }}</td>
+          <td>
+            <button class="download-btn" (click)="handleDownload(d)">
+              <i class="fa-solid fa-download"></i> Download
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ✅ Empty state when no results -->
+    <div *ngIf="!isLoading && filteredDownloads.length === 0" class="empty-state">
+      <i class="fa-regular fa-file-lines"></i>
+      <h4>No downloads found</h4>
+      <p>Try adjusting your search or filter criteria</p>
+    </div>
+  </div>
+</div>

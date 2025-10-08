@@ -1,0 +1,101 @@
+.downloads-container {
+  @apply space-y-6;
+}
+
+/* Header */
+.header {
+  @apply flex justify-between items-center;
+}
+.header-left {
+  @apply flex items-center gap-2;
+}
+.header-left h2 {
+  @apply text-2xl font-bold text-gray-900;
+}
+.icon-yellow {
+  @apply text-yellow-600 text-xl;
+}
+.header-right {
+  @apply text-sm text-gray-500;
+}
+
+/* Card */
+.card {
+  @apply bg-white rounded-lg border border-gray-200 shadow-sm;
+}
+.card-header {
+  @apply flex items-center gap-2 border-b border-gray-200 p-4 font-semibold text-gray-700;
+}
+.card-body {
+  @apply p-4;
+}
+
+/* Filters */
+.filters {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+}
+.search-field {
+  @apply relative;
+}
+.search-field i {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400;
+}
+.search-field input {
+  @apply w-full border border-gray-300 rounded-md pl-10 py-2 text-sm;
+}
+
+/* Table */
+.table-card {
+  @apply mt-6;
+}
+table {
+  @apply w-full border-collapse rounded-lg overflow-hidden;
+}
+thead th {
+  @apply bg-yellow-50 text-left p-3 font-semibold text-gray-700 border-b;
+}
+tbody td {
+  @apply p-3 text-sm border-b text-gray-700 align-middle;
+}
+
+/* Badge colors */
+.badge {
+  @apply px-2 py-1 rounded-md text-xs font-semibold;
+}
+.badge-red {
+  @apply bg-red-100 text-red-800;
+}
+.badge-orange {
+  @apply bg-orange-100 text-orange-800;
+}
+.badge-yellow {
+  @apply bg-yellow-100 text-yellow-800;
+}
+.badge-blue {
+  @apply bg-blue-100 text-blue-800;
+}
+.badge-gray {
+  @apply bg-gray-100 text-gray-800;
+}
+
+/* Buttons */
+.download-btn {
+  @apply flex items-center gap-2 border border-gray-300 rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-yellow-50 hover:border-yellow-300 transition;
+}
+
+/* Loading / Empty states */
+.loading {
+  @apply text-center py-8 text-gray-500;
+}
+.empty-state {
+  @apply flex flex-col items-center justify-center py-12 text-center text-gray-500;
+}
+.empty-state i {
+  @apply text-5xl text-gray-300 mb-3;
+}
+.empty-state h4 {
+  @apply text-lg font-semibold text-gray-700;
+}
+.empty-state p {
+  @apply text-sm text-gray-500;
+}

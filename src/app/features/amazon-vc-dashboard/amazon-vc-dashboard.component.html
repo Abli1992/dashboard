@@ -1,0 +1,125 @@
+<div class="dashboard-container">
+  <!-- Jump Section -->
+  <div class="jump-card">
+    <p class="jump-label">Jump to Section:</p>
+    <div class="jump-buttons">
+      <button
+        *ngFor="let sec of sections"
+        class="jump-btn"
+        [class.active]="activeSection === sec.id"
+        (click)="scrollToSection(sec.id)"
+      >
+        {{ sec.title }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Sections -->
+  <div *ngFor="let section of sections" [attr.id]="section.id" class="section-card">
+    <div class="section-header">
+      <h3>{{ section.title }}</h3>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="section.enabled" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- ✅ Enabled State -->
+    <div *ngIf="section.enabled; else disabledState">
+      <div class="filter-bar">
+        <div class="filter-left">
+          <span class="text-gray-700"
+            >Total Recovered:
+            <span class="text-green-600 font-bold"
+              >{{ formatMoney(section.totalRecovered) }}</span
+            ></span
+          >
+
+          <div class="date-range">
+            <label class="font-medium text-gray-700">Time Period</label>
+            <div class="date-field">
+              <i class="fa-regular fa-calendar"></i>
+              <input
+                type="date"
+                class="date-control"
+                placeholder="dd/mm/yyyy"
+                [(ngModel)]="selectedDate"
+              />
+            </div>
+          </div>
+          <button class="filter-btn" (click)="applyFilter()">
+            <i class="fa-solid fa-filter"></i> Filter
+          </button>
+
+          <div class="select-wrapper">
+            <label class="text-gray-600 text-sm">Country</label>
+            <select [(ngModel)]="filterCountry" class="styled-select">
+              <option>All</option>
+              <option *ngFor="let c of ['US', 'CA', 'UK', 'DE', 'FR']">{{ c }}</option>
+            </select>
+          </div>
+
+          <div class="select-wrapper">
+            <label class="text-gray-600 text-sm">Currency</label>
+            <select [(ngModel)]="filterCurrency" class="styled-select">
+              <option>USD</option>
+              <option>EUR</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-right">
+          <button class="download-btn">
+            <i class="fa-solid fa-download"></i> Download
+          </button>
+        </div>
+      </div>
+
+      <!-- ✅ Table -->
+      <div *ngIf="section.rows.length > 0; else noData">
+        <table>
+          <thead>
+            <tr>
+              <th>COUNTRY</th>
+              <th>VC NAME</th>
+              <th>DISPUTE ID</th>
+              <th>RESOLUTION DATE</th>
+              <th>AMOUNT</th>
+              <th>DOWNLOAD BACKUP REPORT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of section.rows">
+              <td>{{ row.country }}</td>
+              <td>{{ row.vcName }}</td>
+              <td>{{ row.disputeId }}</td>
+              <td>{{ row.resolutionDate }}</td>
+              <td>{{ formatMoney(row.amount) }}</td>
+              <td class="text-center">
+                <button class="download-btn small" (click)="downloadRow(row.disputeId)">
+                  <i class="fa-solid fa-download"></i> Download
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noData>
+        <div class="empty-state">
+          <p>No {{ section.title }} data available.</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!--  Disabled State -->
+    <ng-template #disabledState>
+      <div class="empty-state">
+        <p>{{ section.emptyMessage }}</p>
+        <p class="mt-2">What is the service?</p>
+        <p>Would you like to opt in?</p>
+        <button class="enable-btn">Enable {{ section.title }}</button>
+      </div>
+    </ng-template>
+  </div>
+</div>

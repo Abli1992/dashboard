@@ -1,0 +1,14 @@
+/* Same THC aesthetic */
+.badge {
+  @apply px-2 py-1 rounded-md text-xs font-semibold;
+}
+
+.bg-yellow-500:hover {
+  @apply bg-yellow-600;
+}
+
+textarea,
+input,
+select {
+  @apply focus:ring-2 focus:ring-yellow-400 focus:outline-none;
+}
