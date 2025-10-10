@@ -1,0 +1,153 @@
+.nav-item {
+  @apply flex items-center gap-2 px-6 py-2 rounded-md cursor-pointer transition-all;
+}
+
+.nav-item:hover {
+  background-color: rgb(253 224 71 / 1);
+}
+
+.nav-item.active {
+  background-color: rgb(253 224 71 / 1);
+  color: black;
+  font-weight: 700;
+}
+
+.nav-item.disabled {
+  border: none !important;
+}
+
+aside {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e5e5 transparent;
+}
+
+aside::-webkit-scrollbar {
+  width: 8px;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background-color: #e5e5e5;
+  border-radius: 10px;
+}
+/* Sidebar navigation */
+.nav-item {
+  @apply flex items-center gap-2 px-6 py-2 rounded-md cursor-pointer transition-all;
+}
+
+.nav-item:hover {
+  background-color: rgb(253 224 71 / 1);
+}
+
+.nav-item.active {
+  background-color: rgb(253 224 71 / 1);
+  color: black;
+  font-weight: 700;
+}
+
+.nav-item.disabled {
+  border: none !important;
+}
+
+/* Top sub-navigation */
+.tab-link {
+  @apply px-4 py-2 rounded-md transition-all;
+}
+
+.tab-link:hover {
+  background-color: #fdec8a;
+}
+
+.tab-active {
+  background-color: #fdec8a;
+  font-weight: 700;
+}
+
+/* Scroll styling */
+aside {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e5e5 transparent;
+}
+
+aside::-webkit-scrollbar {
+  width: 8px;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background-color: #e5e5e5;
+  border-radius: 10px;
+}
+/* Sidebar Navigation */
+.nav-item {
+  @apply flex items-center gap-2 px-6 py-2 rounded-md cursor-pointer transition-all;
+}
+
+.nav-item:hover {
+  background-color: rgb(253 224 71 / 1);
+}
+
+.nav-item.active {
+  background-color: rgb(253 224 71 / 1);
+  color: black;
+  font-weight: 700;
+}
+
+/* Tabs */
+.tab-link {
+  @apply px-4 py-2 rounded-md transition-all;
+}
+
+.tab-link:hover {
+  background-color: #fdec8a;
+}
+
+.tab-active {
+  background-color: #fdec8a;
+  font-weight: 700;
+}
+
+/* Jump Section */
+.jump-btn {
+  background-color: #fcfbf5;
+  color: #6b7280;
+  border: 1px solid #f1f1f1;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.jump-btn:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.jump-btn.active {
+  background-color: white;
+  color: black;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Scroll */
+html {
+  scroll-behavior: smooth;
+}
+.nav-item {
+  @apply flex items-center gap-2 px-5 py-2 rounded-md cursor-pointer transition-colors;
+}
+.nav-item:hover {
+  background-color: rgb(253 224 71 / 0.3);
+}
+.nav-item.active {
+  background-color: rgb(253 224 71);
+  font-weight: 600;
+}
+.nav-item.disabled {
+  cursor: not-allowed;
+  border: none !important;
+}
+.leading-tight{
+  font: 600 15px / 20px Roboto, sans-serif !important;
+}
+.nav-item .ti{
+font-size: 18px;
+}

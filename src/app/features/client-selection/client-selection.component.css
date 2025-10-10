@@ -6,3 +6,15 @@
 input::placeholder {
   color: #9ca3af;
 }
+.client-select{
+  font-size: 18px;
+}
+.switch_client h1{
+  font-weight: bold;
+}
+.switch_client p{
+  font-size: 18px;
+}
+.m-20{
+  margin-top: 5rem;
+}

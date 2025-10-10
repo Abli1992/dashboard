@@ -1,6 +1,42 @@
+/* --- Angular Material setup MUST come first --- */
 @use '@angular/material' as mat;
+/* 🌟 Global THC + Tailwind + Angular Material */
 
-/* CSS variables for easy overrides */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Angular Material theme */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Your THC variables, overrides, etc. */
+:root {
+  --thc-yellow: #ffcc00;
+  --thc-black: #111111;
+  --thc-white: #ffffff;
+  --thc-bg: #f6f7fb;
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06),
+             0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+
+$primary: mat.m2-define-palette(mat.$m2-yellow-palette, 600, 300, 900);
+$accent:  mat.m2-define-palette(mat.$m2-grey-palette);
+$warn:    mat.m2-define-palette(mat.$m2-red-palette);
+$theme:   mat.m2-define-light-theme((
+  color: (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn
+  )
+));
+
+@include mat.core();
+@include mat.all-component-themes($theme);
+
+
+/* --- Custom variables and overrides follow --- */
 :root {
   --thc-yellow: #ffcc00;
   --thc-black: #111111;
@@ -9,67 +45,201 @@
   --thc-pill-bg: #fff3bf;
   --thc-pill-green: #00a651;
   --radius: 12px;
-  --shadow: 0 1px 2px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 4px 16px rgba(0, 0, 0, .06);
 }
 
-$primary: mat.m2-define-palette(mat.$m2-yellow-palette, 600, 300, 900);
-$accent:  mat.m2-define-palette(mat.$m2-grey-palette);
-$warn:    mat.m2-define-palette(mat.$m2-red-palette);
-$theme:   mat.m2-define-light-theme(( color: ( primary: $primary, accent: $accent, warn: $warn)));
+/* --- Global reset --- */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--thc-bg);
+  font-family: Inter, Roboto, Arial, sans-serif;
+}
 
-@include mat.core();
-@include mat.all-component-themes($theme);
+.mat-drawer-container {
+  height: 100vh;
+}
 
-html, body { height: 100%; }
-body { margin: 0; background: var(--thc-bg); font-family: Inter, Roboto, Arial, sans-serif; }
-.mat-drawer-container { height: 100vh; }
+/* --- Layout and component styling --- */
+.app-sidenav {
+  background: var(--thc-yellow);
+  color: var(--thc-black);
+  width: 260px;
+  border-right: none;
+}
 
-.app-sidenav { background: var(--thc-yellow); color: var(--thc-black); width: 260px; border-right: none; }
-.app-sidenav .brand { padding:16px; display:flex; flex-direction:column; gap:8px; }
-.brand .logo { font-weight: 700; font-size: 18px; }
-.brand .account-badge { display:inline-block; background: var(--thc-black); color: var(--thc-white); padding:2px 10px; border-radius:999px; font-size:12px; }
+.app-sidenav .brand {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-.mat-toolbar.app-toolbar { background: rgb(250 204 21 / var(--tw-bg-opacity, 1)) !important; color: var(--thc-white); position: sticky; top: 0; z-index: 10; }
-.pinned-bar { position: sticky; top: 64px; z-index: 9; background:#fff7d1; border-bottom:1px solid #eee; padding:8px 12px; }
+.brand .logo {
+  font-weight: 700;
+  font-size: 18px;
+}
 
-.container { padding:16px; }
-.mat-mdc-card { border-radius: var(--radius); box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important; }
-.table-card { padding-bottom: 8px; }
-.table-toolbar { display:flex; gap:12px; flex-wrap: wrap; align-items:center; padding: 8px 16px; }
-.section-header { display:flex; align-items:center; gap:12px; padding:16px; }
-.section-actions { margin-left:auto; display:flex; gap:8px; align-items:center; }
+.brand .account-badge {
+  display: inline-block;
+  background: var(--thc-black);
+  color: var(--thc-white);
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
 
-.total-pill { display:inline-flex; align-items:center; gap:10px; background: var(--thc-pill-bg); color: var(--thc-black); padding:6px 12px; border-radius: 999px; font-weight: 700; }
-.total-pill .green { color: var(--thc-pill-green); }
+.mat-toolbar.app-toolbar {
+  background: rgb(250 204 21 / var(--tw-bg-opacity, 1)) !important;
+  color: var(--thc-white);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
-.enable-card { display:flex; align-items:center; justify-content:center; text-align:center; padding:24px; background: var(--thc-white); border:1px dashed #ddd; border-radius: var(--radius); color:#6b7280; }
+.pinned-bar {
+  position: sticky;
+  top: 64px;
+  z-index: 9;
+  background: #fff7d1;
+  border-bottom: 1px solid #eee;
+  padding: 8px 12px;
+}
+
+.container {
+  padding: 16px;
+}
+
+.mat-mdc-card {
+  border-radius: var(--radius);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.table-card {
+  padding-bottom: 8px;
+}
+
+.table-toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+.section-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.total-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--thc-pill-bg);
+  color: var(--thc-black);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.total-pill .green {
+  color: var(--thc-pill-green);
+}
+
+.enable-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background: var(--thc-white);
+  border: 1px dashed #ddd;
+  border-radius: var(--radius);
+  color: #6b7280;
+}
+
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
-    background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1)) !important;
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1)) !important;
 }
-.chip-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label{
-  background:rgb(253 224 71 / var(--tw-bg-opacity, 1));
-}
-.chip-active:active {
-    background: rgb(253 224 71 / var(--tw-bg-opacity, 1)) !important;
-}
-.mdc-text-field {
-    display: block !important;
-}
-.mat-mdc-text-field-wrapper {
-    width: 100%;
-    z-index: 0;
-    display: block;
-}
-.mat-mdc-icon-button .mat-icon {
-    color: black;
 
+.chip-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
+  .mdc-evolution-chip__text-label {
+  background: rgb(253 224 71 / var(--tw-bg-opacity, 1));
 }
-.mat-elevation-z1{
-    box-shadow: none;
+
+.chip-active:active {
+  background: rgb(253 224 71 / var(--tw-bg-opacity, 1)) !important;
 }
-.mdc-list-item__primary-text{
+
+.mdc-text-field {
+  display: block !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  width: 100%;
+  z-index: 0;
+  display: block;
+}
+
+.mat-mdc-icon-button .mat-icon {
+  color: black;
+}
+
+.mat-elevation-z1 {
+  box-shadow: none;
+}
+
+.mdc-list-item__primary-text {
   display: flex;
 }
-.mdc-list-item__primary-text span{
+
+.mdc-list-item__primary-text span {
   margin: 5px;
+}
+mat-icon {
+  font-family: 'Material Icons Outlined', 'Material Icons', sans-serif !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+lucide-icon,
+lucide-angular,
+i-lucide,
+span-lucide {
+  display: inline-block;
+  vertical-align: middle;
+  stroke-width: 2;
+  color: currentColor;
+}
+.mat-typography h1 {
+    letter-spacing: normal;
+    margin: 0px 0 2px;
+}
+.text-base {
+    font-size: 11px;
+}
+.header-left h2{
+  margin: 0 !important;
+}
+.header-left .icon-yellow{
+  font-size: 2rem !important;
 }

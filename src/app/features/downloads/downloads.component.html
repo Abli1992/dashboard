@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="header">
     <div class="header-left">
-      <i class="fa-solid fa-file-lines icon-yellow"></i>
+      <i class="ti ti-file-description icon-yellow"></i>
       <h2>Your Downloads</h2>
     </div>
     <div class="header-right">
@@ -13,12 +13,12 @@
   <!-- Filters -->
   <div class="card">
     <div class="card-header">
-      <i class="fa-solid fa-filter"></i>
+      <i class="ti ti-filter"></i>
       <span>Filter Downloads</span>
     </div>
     <div class="card-body filters">
       <div class="search-field">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="ti ti-search"></i>
         <input
           type="text"
           placeholder="Search downloads..."
@@ -46,7 +46,7 @@
     <div *ngIf="isLoading" class="loading">Loading...</div>
 
     <!-- ✅ When data exists -->
-    <table *ngIf="!isLoading && filteredDownloads.length > 0">
+    <table >
       <thead>
         <tr>
           <th>Type</th>
@@ -59,8 +59,8 @@
           <th>Download</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let d of filteredDownloads">
+      <tbody *ngIf="!isLoading && filteredDownloads.length > 0">
+        <tr *ngFor="let d of filteredDownloads" >
           <td>
             <span class="badge" [ngClass]="getTypeColor(d.type)">
               {{ d.type }}
@@ -74,18 +74,26 @@
           <td>{{ formatFileSize(d.fileSize) }}</td>
           <td>
             <button class="download-btn" (click)="handleDownload(d)">
-              <i class="fa-solid fa-download"></i> Download
+              <i class="ti ti-download"></i> Download
             </button>
           </td>
         </tr>
       </tbody>
+      <tbody *ngIf="!isLoading && filteredDownloads.length === 0">
+        <tr>
+          <td colspan="8">
+            <div class="empty-state">
+                <i class="ti ti-file-description"></i>
+                <h4>No downloads found</h4>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+          </td>
+        </tr>
+        
+      </tbody>
     </table>
 
     <!-- ✅ Empty state when no results -->
-    <div *ngIf="!isLoading && filteredDownloads.length === 0" class="empty-state">
-      <i class="fa-regular fa-file-lines"></i>
-      <h4>No downloads found</h4>
-      <p>Try adjusting your search or filter criteria</p>
-    </div>
+    
   </div>
 </div>

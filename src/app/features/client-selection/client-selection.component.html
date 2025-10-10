@@ -1,14 +1,14 @@
-<div class="min-h-screen flex flex-col items-center bg-[#f9fafb] px-6 py-12">
+<div class="min-h-screen flex flex-col items-center bg-[#f9fafb] px-6 py- switch_client">
   <!-- Heading -->
-  <h1 class="text-4xl font-black text-gray-900 mb-2 text-center">
+  <h1 class="text-4xl font-black text-gray-900 mb-2 text-center m-20">
     Select Client
   </h1>
-  <p class="text-gray-500 text-base text-center mb-8">
+  <p class="text-gray-500 text-base text-center mb-8 m-2">
     Choose a client to access their recovery dashboard
   </p>
 
   <!-- Search -->
-  <div class="relative w-full max-w-2xl mb-10">
+  <div class="relative w-full max-w-5xl mb-10">
     <input
       type="text"
       [(ngModel)]="searchTerm"
@@ -59,7 +59,7 @@
             />
           </svg>
         </div>
-        <span class="font-semibold text-gray-800">{{ client }}</span>
+        <span class="font-semibold text-gray-800 client-select">{{ client }}</span>
       </div>
 
       <svg

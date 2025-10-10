@@ -1,8 +1,8 @@
 <div class="space-y-8 p-6 bg-gray-50 min-h-screen">
   <!-- Page Header -->
   <div class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <i class="fa-solid fa-file-lines text-yellow-600 text-2xl"></i>
+    <div class="flex items-center gap-2 header-left">
+      <i class="ti ti-file-description text-yellow-600 text-2xl"></i>
       <h2 class="text-2xl font-bold text-gray-900">Client Uploads</h2>
     </div>
     <div class="text-sm text-gray-500">
@@ -11,8 +11,8 @@
   </div>
 
   <!-- Uploads Section Card -->
-  <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-    <h3 class="text-xl font-semibold text-gray-900 mb-4">Your Uploads</h3>
+  <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6 heading_in">
+    <h3 class="text-xl font-bold text-gray-900 mb-4">Your Uploads</h3>
 
     <!-- Loading -->
     <div *ngIf="isLoading" class="text-center py-8 text-gray-500">
@@ -46,10 +46,10 @@
           </td>
           <td class="p-3 text-right">
             <button class="download-btn" (click)="handleDownload(u)">
-              <i class="fa-solid fa-download"></i> Download
+              <i class="ti ti-download"></i> Download
             </button>
             <button class="delete-btn ml-2" (click)="handleDelete(u)">
-              <i class="fa-solid fa-trash"></i> Delete
+              <i class="ti ti-trash"></i> Delete
             </button>
           </td>
         </tr>
@@ -58,11 +58,11 @@
 
     <!-- Empty State -->
     <div *ngIf="!isLoading && filteredUploads.length === 0" class="text-center py-12">
-      <i class="fa-regular fa-file-lines text-5xl text-gray-300 mb-3"></i>
+      <i class="ti ti-file-description text-5xl text-gray-300 mb-3"></i>
       <h4 class="text-lg font-semibold text-gray-700 mb-1">No documents uploaded yet</h4>
-      <p class="text-sm text-gray-500">
+      <!-- <p class="text-sm text-gray-500">
         Try adjusting your filters or upload a new document
-      </p>
+      </p> -->
     </div>
   </div>
 </div>

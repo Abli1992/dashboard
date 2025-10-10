@@ -24,7 +24,18 @@
   @apply bg-white rounded-lg border border-gray-200 shadow-sm;
 }
 .card-header {
-  @apply flex items-center gap-2 border-b border-gray-200 p-4 font-semibold text-gray-700;
+  @apply flex items-center gap-2   p-4 font-semibold text-gray-700;
+  
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 18px;
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
+    padding: 1rem;
+    font-weight: bold;
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity, 1));
 }
 .card-body {
   @apply p-4;
@@ -34,14 +45,88 @@
 .filters {
   @apply grid grid-cols-1 md:grid-cols-3 gap-4;
 }
+/* --- Filters Section (Equal Width Layout) --- */
+.card-body.filters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 1rem; /* space between each field */
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- Search Field --- */
 .search-field {
-  @apply relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  background: #fff;
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
 }
+
 .search-field i {
-  @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400;
+  color: #9ca3af;
+  font-size: 1rem;
 }
+
 .search-field input {
-  @apply w-full border border-gray-300 rounded-md pl-10 py-2 text-sm;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: #111827;
+  width: 100%;
+  background: transparent;
+}
+
+.search-field input::placeholder {
+  color: #9ca3af;
+}
+
+/* --- Dropdowns --- */
+.card-body.filters select {
+  width: 100%;
+  height: 44px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  background-color: #ffffff;
+  color: #111827;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='none' stroke='%2355638b' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E<path stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  font-weight: 100;
+  box-sizing: border-box;
+}
+
+/* --- Hover + Focus States --- */
+.card-body.filters select:hover,
+.search-field:hover {
+  border-color: #94a3b8;
+}
+
+.card-body.filters select:focus,
+.search-field input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* --- Responsive (Stack on small screens) --- */
+@media (max-width: 768px) {
+  .card-body.filters {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Table */
@@ -52,7 +137,7 @@ table {
   @apply w-full border-collapse rounded-lg overflow-hidden;
 }
 thead th {
-  @apply bg-yellow-50 text-left p-3 font-semibold text-gray-700 border-b;
+  @apply bg-yellow-50 text-left p-3 font-thin text-gray-700 border-b;
 }
 tbody td {
   @apply p-3 text-sm border-b text-gray-700 align-middle;

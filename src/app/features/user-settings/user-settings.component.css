@@ -1,0 +1,28 @@
+.card {
+  @apply bg-white border rounded-lg p-6 shadow-sm;
+}
+
+.card.yellow {
+  @apply bg-yellow-100 border-yellow-200;
+}
+
+.field-header {
+  @apply flex justify-between items-center mb-2 font-medium text-gray-700;
+}
+
+.edit-btn {
+  @apply text-sm text-gray-700 hover:text-black;
+}
+
+input {
+  @apply border border-gray-300 rounded px-2 py-1 flex-1;
+}
+.icon-lg .ti{
+font-size: 20px;
+}
+.act_info h2{
+  font-weight: bold;
+}
+.user_detail{
+  font-size: 20px;
+}

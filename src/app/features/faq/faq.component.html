@@ -1,0 +1,94 @@
+<div class="space-y-6 p-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+      <i class="ti ti-help-circle"></i> Frequently Asked Questions
+    </h2>
+    <div class="relative w-80">
+      <i class="ti ti-search absolute left-3 top-2.5 text-gray-400 text-lg"></i>
+      <input
+        type="text"
+        placeholder="Search FAQs..."
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)"
+        class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      />
+    </div>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="grid grid-cols-4 gap-2 bg-yellow-100 rounded-lg p-2 ">
+    <button
+      class="tab-btn flex items-center justify-center gap-2"
+      [class.active]="activeCategory() === 'overbilling'"
+      (click)="setCategory('overbilling')"
+    >
+      <i class="ti ti-currency-dollar"></i> Overbilling
+    </button>
+    <button
+      class="tab-btn flex items-center justify-center gap-2"
+      [class.active]="activeCategory() === 'shortages'"
+      (click)="setCategory('shortages')"
+    >
+      <i class="ti ti-alert-triangle"></i> Shortages
+    </button>
+    <button
+      class="tab-btn flex items-center justify-center gap-2"
+      [class.active]="activeCategory() === 'invoices'"
+      (click)="setCategory('invoices')"
+    >
+      <i class="ti ti-file-invoice"></i> Missing Invoices
+    </button>
+    <button
+      class="tab-btn flex items-center justify-center gap-2"
+      [class.active]="activeCategory() === 'audits'"
+      (click)="setCategory('audits')"
+    >
+      <i class="ti ti-checklist"></i> Audits
+    </button>
+  </div>
+
+  <!-- FAQ Card -->
+  <div class="bg-white border rounded-lg shadow-sm p-6">
+    <!-- Category Heading -->
+    <div class="flex items-center gap-2 mb-4 heading_faq">
+      <i
+        class="text-yellow-600 text-xl ti abc"
+        [ngClass]="{
+          ' ti-currency-dollar': activeCategory() === 'overbilling',
+          ' ti-alert-triangle': activeCategory() === 'shortages',
+          ' ti-file-invoice': activeCategory() === 'invoices',
+          ' ti-check': activeCategory() === 'audits'
+        }"
+      ></i>
+      <h3 class="text-xl font-bold text-gray-900 capitalize">
+        {{ activeCategory() | titlecase }}
+      </h3>
+    </div>
+
+    <!-- No FAQs -->
+    <div *ngIf="filteredFAQs().length === 0" class="text-gray-500 text-center py-6">
+      No FAQs found.
+    </div>
+
+    <!-- FAQ List -->
+    <div *ngFor="let faq of filteredFAQs()" class="border-b py-4">
+      <button
+        class="w-full text-left font-medium text-gray-800 flex justify-between items-center"
+        (click)="faq['open'] = !faq['open']"
+      >
+        <span class="flex items-center gap-2">
+          {{ faq.question }}
+        </span>
+        <i
+          class="ti"
+          [ngClass]="faq['open'] ? 'ti-chevron-up' : 'ti-chevron-down'"
+        ></i>
+      </button>
+
+      <div *ngIf="faq['open']" class="mt-2 text-gray-600 leading-relaxed">
+        {{ faq.answer }}
+      </div>
+    </div>
+  </div>
+</div>

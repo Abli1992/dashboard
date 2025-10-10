@@ -10,6 +10,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { AppComponent } from './app/app.component';
 import { APP_ROUTES } from './app/app.routes';
+import 'lucide';
 
 
 bootstrapApplication(AppComponent, {

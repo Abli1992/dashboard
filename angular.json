@@ -15,26 +15,59 @@
             "main": "src/main.ts",
             "polyfills": [],
             "tsConfig": "tsconfig.app.json",
+
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
+
             "styles": [
-              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/css/font-awesome.css",
+              "src/assets/css/tabler-icons.css"
             ],
+
             "scripts": []
+          },
+
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "baseHref": "/dashboard/"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "sourceMap": true,
+              "namedChunks": true
+            }
           }
         },
+
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "thc-dashboard-final:build"
+            "buildTarget": "thc-dashboard-final:build:development"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "thc-dashboard-final:build:production"
+            },
+            "development": {
+              "browserTarget": "thc-dashboard-final:build:development"
+            }
           }
         }
       }
     }
   },
+
   "cli": {
     "defaultProject": "thc-dashboard-final",
     "analytics": "bdfab95b-986a-459c-84c4-4c3dd335ab45"

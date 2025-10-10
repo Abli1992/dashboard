@@ -20,21 +20,24 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatButtonToggleModule,
+    MatButtonToggleModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  userType: 'external' | 'internal' = 'external';
   email = '';
   password = '';
+  isInternal = false;
 
   constructor(private router: Router) {}
 
-  onSubmit() {
-    if (this.email && this.password) {
-      this.router.navigate(['/overbilling']);
-    }
+  toggleUserType(internal: boolean) {
+    this.isInternal = internal;
+  }
+
+  login() {
+    // For now just navigate to dashboard
+    this.router.navigate(['/dashboard']);
   }
 }

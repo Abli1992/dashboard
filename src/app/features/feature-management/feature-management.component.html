@@ -1,0 +1,165 @@
+<div class="space-y-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold flex items-center gap-2 heading_featuremanagement">
+      <i class="ti ti-settings"></i> Feature Management
+    </h1>
+    <button
+      *ngIf="selectedClientId()"
+      class="border px-3 py-1 rounded-md text-sm"
+      (click)="selectedClientId.set(null)"
+    >
+      <i class="ti ti-refresh"></i> Change Client
+    </button>
+  </div>
+
+  <!-- Select client -->
+  <div *ngIf="!selectedClientId()">
+    <div class="bg-white rounded-lg p-4 border">
+      <label class="font-semibold block mb-2 select_client">Select Client</label>
+      <select
+        class="w-full border rounded-lg p-2"
+        (change)="onClientChange($event)"
+      >
+        <option value="" disabled selected>Choose a client to manage features</option>
+        <option *ngFor="let c of clients()" [value]="c.id">
+          {{ c.name }} ({{ c.clientCode }})
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading()" class="text-center text-gray-500 py-8">
+    <i class="ti ti-loader-2 animate-spin"></i> Loading features...
+  </div>
+
+  <!-- Initialize -->
+  <div *ngIf="selectedClientId() && !loading() && features().length === 0">
+    <div class="bg-white p-6 border rounded-lg">
+      <h2 class="font-bold text-lg mb-2 flex items-center gap-2">
+        <i class="ti ti-adjustments"></i> Initialize Features
+      </h2>
+      <p class="text-gray-500 mb-4">
+        This client doesn’t have any feature settings yet. Click below to initialize defaults.
+      </p>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2" (click)="initializeFeatures()">
+        <i class="ti ti-plus"></i> Initialize Default Features
+      </button>
+    </div>
+  </div>
+
+  <!-- Recovery Types -->
+  <div *ngIf="features().length > 0" class="bg-white border rounded-lg">
+    <div
+      class="flex items-center justify-between px-4 py-3 cursor-pointer border-b"
+      (click)="toggleSection('recovery')"
+    >
+      <h2 class="font-semibold flex items-center gap-2">
+        <i class="ti ti-rotate-clockwise"></i> Recovery Types
+      </h2>
+      <i [class]="expanded().recovery ? 'ti ti-chevron-up' : 'ti ti-chevron-down'"></i>
+    </div>
+
+    <div *ngIf="expanded().recovery" class="p-4 space-y-3">
+      <div
+        *ngFor="let r of RECOVERY_TYPES"
+        class="flex items-center justify-between border-b pb-2"
+      >
+        <span>{{ r.name }}</span>
+        <div class="flex items-center gap-2">
+          <span
+            class="px-2 py-1 text-xs rounded"
+            [ngClass]="{
+              'bg-green-100 text-green-700': getFeatureStatus(r.key, 'recovery_type'),
+              'bg-gray-200 text-gray-600': !getFeatureStatus(r.key, 'recovery_type')
+            }"
+          >
+            {{ getFeatureStatus(r.key, 'recovery_type') ? 'Y' : 'N' }}
+          </span>
+          <input
+            type="checkbox"
+            [checked]="getFeatureStatus(r.key, 'recovery_type')"
+            (change)="toggleFeature(getFeature(r.key, 'recovery_type'))"
+            class="accent-yellow-500"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marketplaces -->
+  <div *ngIf="features().length > 0" class="bg-white border rounded-lg">
+    <div
+      class="flex items-center justify-between px-4 py-3 cursor-pointer border-b"
+      (click)="toggleSection('marketplace')"
+    >
+      <h2 class="font-semibold flex items-center gap-2">
+        <i class="ti ti-building-store"></i> Marketplaces
+      </h2>
+      <i [class]="expanded().marketplace ? 'ti ti-chevron-up' : 'ti ti-chevron-down'"></i>
+    </div>
+
+    <div *ngIf="expanded().marketplace" class="p-4 space-y-3">
+      <div
+        *ngFor="let m of MARKETPLACES"
+        class="flex items-center justify-between border-b pb-2"
+      >
+        <span>{{ m.name }}</span>
+        <div class="flex items-center gap-2">
+          <span
+            class="px-2 py-1 text-xs rounded"
+            [ngClass]="{
+              'bg-green-100 text-green-700': getFeatureStatus(m.key, 'marketplace'),
+              'bg-gray-200 text-gray-600': !getFeatureStatus(m.key, 'marketplace')
+            }"
+          >
+            {{ getFeatureStatus(m.key, 'marketplace') ? 'Active' : 'Disabled' }}
+          </span>
+          <input
+            type="checkbox"
+            [checked]="getFeatureStatus(m.key, 'marketplace')"
+            (change)="toggleFeature(getFeature(m.key, 'marketplace'))"
+            class="accent-yellow-500"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div *ngIf="features().length > 0" class="bg-white border rounded-lg">
+    <div
+      class="flex items-center justify-between px-4 py-3 cursor-pointer border-b"
+      (click)="toggleSection('notes')"
+    >
+      <h2 class="font-semibold flex items-center gap-2">
+        <i class="ti ti-notes"></i> Notes
+      </h2>
+      <i [class]="expanded().notes ? 'ti ti-chevron-up' : 'ti ti-chevron-down'"></i>
+    </div>
+
+    <div *ngIf="expanded().notes" class="p-4 space-y-3">
+      <textarea
+        [ngModel]="newNote()"
+        (ngModelChange)="newNote.set($event)"
+        placeholder="Add a note..."
+        class="w-full border rounded-lg p-2 min-h-[80px]"
+      ></textarea>
+      <button
+        class="bg-yellow-500 text-white px-4 py-2 rounded flex items-center gap-2"
+        (click)="addNote()"
+        [disabled]="!newNote().trim()"
+      >
+        <i class="ti ti-device-floppy"></i> Add Note
+      </button>
+
+      <div *ngFor="let note of notes()" class="bg-yellow-100 p-3 rounded-lg">
+        <p class="text-sm">{{ note.note }}</p>
+        <p class="text-xs text-gray-500">
+          {{ note.createdAt | date: 'short' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

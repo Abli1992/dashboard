@@ -1,0 +1,142 @@
+<div class="space-y-6 p-6">
+  <!-- Header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+      <i class="ti ti-settings"></i> Account Settings
+    </h1>
+    <p class="text-gray-600 mt-1">
+      Manage your personal information and account preferences
+    </p>
+  </div>
+
+  <!-- Name -->
+  <div class="card yellow">
+    <div class="field-header flex justify-between items-center">
+      <span class="flex items-center gap-2 text-gray-800 font-medium icon-lg">
+        <i class="ti ti-user"></i> Your Name
+      </span>
+      <button *ngIf="editingField() !== 'name'" (click)="startEdit('name')" class="edit-btn">
+        <i class="ti ti-pencil"></i>
+      </button>
+    </div>
+    <div *ngIf="editingField() === 'name'; else nameDisplay">
+      <div class="flex gap-2 items-center mt-2">
+        <input [(ngModel)]="tempValues.firstName" placeholder="First name" />
+        <input [(ngModel)]="tempValues.lastName" placeholder="Last name" />
+        <button (click)="saveEdit('firstName')" class="icon-btn text-green-600">
+          <i class="ti ti-device-floppy"></i>
+        </button>
+        <button (click)="cancelEdit()" class="icon-btn text-red-600">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+    </div>
+    <ng-template #nameDisplay>
+      <p class="text-lg font-medium mt-1">
+        {{ profile().firstName }} {{ profile().lastName }}
+      </p>
+    </ng-template>
+  </div>
+
+  <!-- Email -->
+  <div class="card yellow">
+    <div class="field-header flex justify-between items-center">
+      <span class="flex items-center gap-2 text-gray-800 font-medium icon-lg">
+        <i class="ti ti-mail"></i> Your Email Address
+      </span>
+      <button *ngIf="editingField() !== 'email'" (click)="startEdit('email')" class="edit-btn">
+        <i class="ti ti-pencil"></i>
+      </button>
+    </div>
+    <div *ngIf="editingField() === 'email'; else emailDisplay">
+      <div class="flex gap-2 items-center mt-2">
+        <input [(ngModel)]="tempValues.email" type="email" placeholder="Email" />
+        <button (click)="saveEdit('email')" class="icon-btn text-green-600">
+          <i class="ti ti-device-floppy"></i>
+        </button>
+        <button (click)="cancelEdit()" class="icon-btn text-red-600">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+    </div>
+    <ng-template #emailDisplay>
+      <a class="text-blue-600 underline mt-1 block">{{ profile().email }}</a>
+    </ng-template>
+  </div>
+
+  <!-- Phone -->
+  <div class="card yellow">
+    <div class="field-header flex justify-between items-center">
+      <span class="flex items-center gap-2 text-gray-800 font-medium icon-lg">
+        <i class="ti ti-phone"></i> Your Number
+      </span>
+      <button *ngIf="editingField() !== 'phone'" (click)="startEdit('phone')" class="edit-btn">
+        <i class="ti ti-pencil"></i>
+      </button>
+    </div>
+    <div *ngIf="editingField() === 'phone'; else phoneDisplay">
+      <div class="flex gap-2 items-center mt-2">
+        <input [(ngModel)]="tempValues.phone" type="tel" placeholder="+1 234567890" />
+        <button (click)="saveEdit('phone')" class="icon-btn text-green-600">
+          <i class="ti ti-device-floppy"></i>
+        </button>
+        <button (click)="cancelEdit()" class="icon-btn text-red-600">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+    </div>
+    <ng-template #phoneDisplay>
+      <p class="text-lg font-medium mt-1">{{ profile().phone }}</p>
+    </ng-template>
+  </div>
+
+  <!-- Password -->
+   
+  <div class="card yellow">
+    <div class="field-header flex justify-between items-center">
+      <span class="flex items-center gap-2 text-gray-800 font-medium icon-lg">
+        <i class="ti ti-lock"></i> Your Password
+      </span>
+      <button *ngIf="!showPasswordForm()" (click)="showPasswordForm.set(true)" class="edit-btn">
+        <i class="ti ti-pencil"></i>
+      </button>
+    </div>
+
+    <div *ngIf="showPasswordForm(); else passwordDisplay">
+      <div class="flex flex-col gap-2 mt-2">
+        <input [(ngModel)]="tempValues.currentPassword" type="password" placeholder="Current Password" />
+        <input [(ngModel)]="tempValues.newPassword" type="password" placeholder="New Password" />
+        <input [(ngModel)]="tempValues.confirmPassword" type="password" placeholder="Confirm Password" />
+        <div class="flex gap-2 mt-2">
+          <button (click)="updatePassword()" class="text-green-600 flex items-center gap-1">
+            <i class="ti ti-check"></i> Update
+          </button>
+          <button (click)="showPasswordForm.set(false)" class="text-red-600 flex items-center gap-1">
+            <i class="ti ti-x"></i> Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #passwordDisplay>
+      <p class="text-lg font-medium mt-1">•••••••••••••</p>
+    </ng-template>
+  </div>
+
+  <!-- Account Information -->
+  <div class="card act_info">
+    <h2 class="text-lg font-bold mb-3 flex items-center gap-2">
+       Account Information
+    </h2>
+    <div class="grid grid-cols-2 gap-4 user_detail">
+      <div>
+        <span class="text-sm text-gray-600">Account Type</span>
+        <p class="font-medium">{{ profile().userType }} User</p>
+      </div>
+      <div>
+        <span class="text-sm text-gray-600">User ID</span>
+        <p class="font-medium">{{ profile().id }}</p>
+      </div>
+    </div>
+  </div>
+</div>

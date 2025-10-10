@@ -1,0 +1,17 @@
+
+.tab-btn {
+  @apply text-gray-700 font-medium py-2 px-3 rounded-md hover:bg-yellow-200 transition;
+}
+.tab-btn.active {
+  @apply bg-yellow-400 text-gray-900 font-semibold shadow-sm;
+}
+.heading_faq h3{
+  margin-bottom: 0;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.tab-btn i{
+  font-size: 16px;
+  font-size: 20px;
+  font-weight: bolder;
+}
